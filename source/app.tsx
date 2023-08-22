@@ -11,11 +11,21 @@ const scripts: {label: string; value: AvailableScripts}[] = [
 	{label: 'create-react-component', value: 'create-react-component'},
 ];
 
+const startingIntro = `
+****************************
+	STARTING CLI...
+****************************
+`;
+
 type AppProps = {
 	start: string | undefined;
 };
 
-export default function App({start = 'Starting CLI...'}: AppProps) {
+/**
+ * A cli builder, it will execute scripts that will do various things that I don't want to do myself such as creating a new react component or scaffolding projects or changing into deep directories
+ * @param start The text that will appear at the very start, an introduction.
+ */
+export default function App({start = startingIntro}: AppProps) {
 	const [message, setMessage] = useState<string | null>(null);
 
 	const handleSelect = (item: {label: string; value: AvailableScripts}) => {
@@ -51,19 +61,21 @@ export default function App({start = 'Starting CLI...'}: AppProps) {
 	return (
 		<>
 			<Box>
-				<Text>{start}</Text>
-			</Box>
-
-			<Box margin={0}>
-				<Text>Which script would you like to run?</Text>
+				<Text bold color="cyan">
+					{start}
+				</Text>
 			</Box>
 
 			<Box>
+				<Text color="yellow">Which script would you like to run?</Text>
+			</Box>
+
+			<Box marginY={1}>
 				<SelectInput items={scripts} onSelect={handleSelect} />
 			</Box>
 
-			<Box>
-				<Text>{message}</Text>
+			<Box marginY={1}>
+				<Text color="green">{message}</Text>
 			</Box>
 		</>
 	);
