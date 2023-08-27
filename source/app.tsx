@@ -11,6 +11,7 @@ import {AvailableScripts} from './types/AvailableScriptsType.js';
 import Title from './Title.js';
 import ScriptsList from './ScriptsList.js';
 import ScriptMessage from './ScriptMessage.js';
+import CreateHTMLTemplate from './CreateHtmlTemplate.js';
 
 const scripts: {label: string; value: AvailableScripts}[] = [
 	{label: 'basic-html', value: 'basic-html'},
