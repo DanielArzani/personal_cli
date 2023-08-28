@@ -7,6 +7,7 @@ const {useTimeout} = pkg;
 
 import {AvailableScripts} from '../types/AvailableScriptsType.js';
 import createBasicPlayGround from '../scripts/createBasicPlayground.js';
+import createReactTemplate from '../scripts/createReactTemplate.js';
 
 type Message = {
 	hasDots: [boolean, number];
@@ -33,7 +34,7 @@ export const useHandleScripts = () => {
 		}
 	}, [shouldExit]);
 
-	useTimeout(() => setShouldExit(true), animationTime + 500);
+	useTimeout(() => setShouldExit(true), animationTime + 5000);
 
 	const handleSelect = (item: {label: string; value: AvailableScripts}) => {
 		switch (item.value) {
@@ -44,7 +45,6 @@ export const useHandleScripts = () => {
 				});
 
 				createBasicPlayGround();
-
 				break;
 
 			case 'sass':
@@ -69,6 +69,7 @@ export const useHandleScripts = () => {
 					text: 'Creating new react project',
 				});
 
+				createReactTemplate();
 				break;
 
 			case 'create-react-component':
