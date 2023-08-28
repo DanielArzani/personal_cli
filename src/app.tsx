@@ -3,12 +3,8 @@ import React, {useState} from 'react';
 import pkg from 'usehooks-ts';
 const {useTimeout} = pkg;
 
-import {Text, Box} from 'ink';
-import Gradient from 'ink-gradient';
-import BigText from 'ink-big-text';
-
-import Title from './Title.js';
-import ScriptsList from './ScriptsList.js';
+import Title from './components/Title.js';
+import ScriptsList from './components/ScriptsList.js';
 
 type AppProps = {
 	start: string | undefined;
