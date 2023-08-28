@@ -1,6 +1,9 @@
-import {Text} from 'ink';
 import React from 'react';
+
 import Dots from './Dots.js';
+
+import {Box, Text} from 'ink';
+import Spinner from 'ink-spinner';
 
 type ScriptMessageProps = {
 	text: string;
@@ -20,14 +23,11 @@ export default function ScriptMessage({hasDots, text}: ScriptMessageProps) {
 	}
 
 	return (
-		<>
-			{hasDots && (
-				<Text>
-					{text}
-					<Dots time={time ? time : 0} />
-				</Text>
-			)}
-			{!hasDots && <Text>{text}</Text>}
-		</>
+		<Box gap={1} marginBottom={1}>
+			{hasDots && <Text>{text}</Text>}
+
+			{dots === false && <Spinner />}
+			{dots === true && <Dots time={time ? time : 0} />}
+		</Box>
 	);
 }

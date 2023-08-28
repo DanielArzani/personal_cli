@@ -40,16 +40,17 @@ export const useHandleScripts = () => {
 		switch (item.value) {
 			case 'basic-html':
 				setMessage({
-					hasDots: [true, animationTime],
+					hasDots: [false, animationTime],
 					text: 'Creating a basic html,css,js template',
 				});
 
 				createBasicPlayGround();
 				break;
 
+			// TODO: Delete this since I don't really use sass anymore
 			case 'sass':
 				setMessage({
-					hasDots: [true, animationTime],
+					hasDots: [false, animationTime],
 					text: 'Creating a basic sass template',
 				});
 
@@ -57,7 +58,7 @@ export const useHandleScripts = () => {
 
 			case 'change-dir':
 				setMessage({
-					hasDots: [true, animationTime],
+					hasDots: [false, animationTime],
 					text: 'Changing directory',
 				});
 
@@ -65,7 +66,7 @@ export const useHandleScripts = () => {
 
 			case 'create-react-project':
 				setMessage({
-					hasDots: [true, animationTime],
+					hasDots: [false, animationTime],
 					text: 'Creating new react project',
 				});
 
@@ -74,7 +75,7 @@ export const useHandleScripts = () => {
 
 			case 'create-react-component':
 				setMessage({
-					hasDots: [true, animationTime],
+					hasDots: [false, animationTime],
 					text: 'Creating new react component',
 				});
 
