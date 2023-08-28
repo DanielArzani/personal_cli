@@ -17,8 +17,8 @@ export default function openFileWithApp(
 		console.error(err);
 	});
 
-	child.on('exit', (code, signal) => {
-		console.log(`Opening ${path}`);
-		console.log(`Child process exited with code ${code} and signal ${signal}`);
-	});
+	// child.on('exit', (code, signal) => {
+	// 	console.log(`Opening ${path}`);
+	// 	console.log(`Child process exited with code ${code} and signal ${signal}`);
+	// });
 }

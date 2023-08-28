@@ -1,5 +1,12 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
+
+import {useApp} from 'ink';
+
+import pkg from 'usehooks-ts';
+const {useTimeout} = pkg;
+
 import {AvailableScripts} from '../types/AvailableScriptsType.js';
+import createBasicPlayGround from '../scripts/createBasicPlayground.js';
 
 type Message = {
 	hasDots: [boolean, number];
@@ -15,19 +22,34 @@ type Message = {
  */
 export const useHandleScripts = () => {
 	const [message, setMessage] = useState<Message>();
+	const [animationTime, setAnimationTime] = useState<number>(3000);
+	const [shouldExit, setShouldExit] = useState<boolean>(false);
+	const {exit} = useApp();
+
+	// exit the application
+	useEffect(() => {
+		if (shouldExit) {
+			exit();
+		}
+	}, [shouldExit]);
+
+	useTimeout(() => setShouldExit(true), animationTime + 500);
 
 	const handleSelect = (item: {label: string; value: AvailableScripts}) => {
 		switch (item.value) {
 			case 'basic-html':
 				setMessage({
-					hasDots: [true, 3000],
+					hasDots: [true, animationTime],
 					text: 'Creating a basic html,css,js template',
 				});
+
+				createBasicPlayGround();
+
 				break;
 
 			case 'sass':
 				setMessage({
-					hasDots: [true, 3000],
+					hasDots: [true, animationTime],
 					text: 'Creating a basic sass template',
 				});
 
@@ -35,23 +57,26 @@ export const useHandleScripts = () => {
 
 			case 'change-dir':
 				setMessage({
-					hasDots: [true, 3000],
+					hasDots: [true, animationTime],
 					text: 'Changing directory',
 				});
+
 				break;
 
 			case 'create-react-project':
 				setMessage({
-					hasDots: [true, 3000],
+					hasDots: [true, animationTime],
 					text: 'Creating new react project',
 				});
+
 				break;
 
 			case 'create-react-component':
 				setMessage({
-					hasDots: [true, 3000],
+					hasDots: [true, animationTime],
 					text: 'Creating new react component',
 				});
+
 				break;
 
 			default:
