@@ -18,6 +18,8 @@
 		"dist"
 	],
 	"dependencies": {
+		"@types/fs-extra": "^11.0.1",
+		"fs-extra": "^11.1.1",
 		"ink": "^4.1.0",
 		"ink-big-text": "^2.0.0",
 		"ink-gradient": "^3.0.0",
