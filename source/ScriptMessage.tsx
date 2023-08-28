@@ -1,6 +1,6 @@
 import {Text} from 'ink';
 import React from 'react';
-import Dots from './dots.js';
+import Dots from './Dots.js';
 
 type ScriptMessageProps = {
 	text: string;

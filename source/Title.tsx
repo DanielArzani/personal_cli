@@ -3,7 +3,7 @@ import React from 'react';
 import {Box, Text} from 'ink';
 import Gradient from 'ink-gradient';
 import BigText from 'ink-big-text';
-import Dots from './dots.js';
+import Dots from './Dots.js';
 
 /**
  * Displays the beginning introduction when the app is first started

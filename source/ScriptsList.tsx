@@ -1,27 +1,26 @@
 import React from 'react';
 
 import {Box, Text} from 'ink';
-
 import SelectInput from 'ink-select-input';
-import {AvailableScripts} from './types/AvailableScriptsType.js';
 
-type ScriptsListProps = {
-	scripts: {label: string; value: AvailableScripts}[]; // Updated type
-	handleSelect: (item: {label: string; value: AvailableScripts}) => void;
-	message: string;
-};
+import {AvailableScripts} from './types/AvailableScriptsType.js';
+import {handleSelect} from './HandleScripts.js';
+
+const scripts: {label: string; value: AvailableScripts}[] = [
+	{label: 'basic-html', value: 'basic-html'},
+	{label: 'sass', value: 'sass'},
+	{label: 'change-dir', value: 'change-dir'},
+	{label: 'create-react-project', value: 'create-react-project'},
+	{label: 'create-react-component', value: 'create-react-component'},
+];
+
+type ScriptsListProps = {};
 
 /**
  * Displays the list of scripts that the user can choose from. A visual component, does not perform any actions on a chosen script
- * @param scripts The list of available scripts
- * @param handleSelect The callback for handling what happens when a script is chosen
- * @param message What message to show when a script is selected
+ * @param handleSelect The handler for what happens when an option is chosen
  */
-export default function ScriptsList({
-	handleSelect,
-	message,
-	scripts,
-}: ScriptsListProps) {
+export default function ScriptsList({}: ScriptsListProps) {
 	return (
 		<>
 			<Title />
@@ -29,8 +28,6 @@ export default function ScriptsList({
 			<Box marginY={1}>
 				<SelectInput items={scripts} onSelect={handleSelect} />
 			</Box>
-
-			<ResultMessage message={message} />
 		</>
 	);
 }
@@ -42,18 +39,6 @@ function Title() {
 	return (
 		<Box marginY={1}>
 			<Text color="yellow">Which script would you like to run?</Text>
-		</Box>
-	);
-}
-
-/**
- * The message that appears as a result of the chosen script
- * @param message The message that should be displayed
- */
-function ResultMessage({message}: {message: string}) {
-	return (
-		<Box marginY={1}>
-			<Text color="green">{message}</Text>
 		</Box>
 	);
 }
