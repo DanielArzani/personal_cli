@@ -4,7 +4,7 @@ import {getWorkingDirectory} from '../node_functions/getWorkingDir.js';
 /**
  * Creates a react component within the src/components folder. If an error comes up such as a specific folder not existing then an error string gets returned. Display this error string how ever you want.
  */
-export default function createReactComponent(): string {
+export default function createReactComponent(): string | undefined {
 	let error: string;
 
 	// Get the current directory
@@ -20,5 +20,5 @@ export default function createReactComponent(): string {
 		return error;
 	}
 
-	return 'This is an empty string';
+	return;
 }

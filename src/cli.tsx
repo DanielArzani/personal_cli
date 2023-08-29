@@ -26,4 +26,7 @@ const cli = meow(
 	},
 );
 
-render(<App start={cli.flags.start} />);
+render(<App start={cli.flags.start} />, {
+	// will make it so that react ink will stop intercepting console.logs
+	patchConsole: false, //! doesn't work
+});

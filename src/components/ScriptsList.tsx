@@ -6,6 +6,8 @@ import SelectInput from 'ink-select-input';
 import {AvailableScripts} from '../types/AvailableScriptsType.js';
 import {useHandleScripts} from '../hooks/useHandleScripts.js';
 import ScriptMessage from './ScriptMessage.js';
+import ScriptAction from './ScriptAction.js';
+import {useStdout} from 'ink';
 
 /**
  * These are essentially the options for the select element, it has to take a slightly different form for react-ink apps though
@@ -18,14 +20,18 @@ const scripts: {label: string; value: AvailableScripts}[] = [
 	{label: 'create-react-component', value: 'create-react-component'},
 ];
 
-type ScriptsListProps = {};
+type ScriptsListProps = {
+	setScript: React.Dispatch<React.SetStateAction<string | undefined>>;
+};
 
 /**
  * Displays the list of scripts that the user can choose from. A visual component, does not perform any actions on a chosen script
  * @param handleSelect The handler for what happens when an option is chosen
  */
-export default function ScriptsList({}: ScriptsListProps) {
-	const {handleSelect, message} = useHandleScripts();
+export default function ScriptsList({setScript}: ScriptsListProps) {
+	const {handleSelect, script} = useHandleScripts();
+
+	if (script !== undefined) setScript(script);
 	return (
 		<>
 			<ScriptsListTitle />
@@ -33,13 +39,6 @@ export default function ScriptsList({}: ScriptsListProps) {
 			<Box marginY={1}>
 				<SelectInput items={scripts} onSelect={handleSelect} />
 			</Box>
-
-			{message?.error && <ScriptMessage text={message.error} />}
-
-			<ScriptMessage
-				text={message ? message.text : ''}
-				hasDots={message?.hasDots}
-			/>
 		</>
 	);
 }

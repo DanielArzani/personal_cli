@@ -6,99 +6,57 @@ import pkg from 'usehooks-ts';
 const {useTimeout} = pkg;
 
 import {AvailableScripts} from '../types/AvailableScriptsType.js';
-import createBasicPlayGround from '../scripts/createBasicPlayground.js';
-import createReactTemplate from '../scripts/createReactTemplate.js';
-import createReactComponent from '../scripts/createReactComponent.js';
 
 import {useStdout} from 'ink';
 
-type Message = {
-	hasDots?: [boolean, number];
-	text: string;
-	error?: string;
-};
-
 /**
- * This hook contains the data that should be given as a result of choosing a script as well as the action that will be performed when the script is chosen.
+ * When an option from the SelectInput is chosen, this component will return a string matching that value and that can be used to call the correct script from ScriptAction
  *
- * This hook returns
- * - message: An object containing the message that should be shown after a script is chosen and a tuple for whether the message should have dots and how long they should animate for
- * - handleSelect: The onSelect event handler for the Select element
  */
 export const useHandleScripts = () => {
-	const [message, setMessage] = useState<Message>();
+	const [script, setScript] = useState<AvailableScripts | undefined>();
 	const [animationTime, setAnimationTime] = useState<number>(3000);
 	const [shouldExit, setShouldExit] = useState<boolean>(false);
 	const {exit} = useApp();
 	const {write} = useStdout();
 
 	// exit the application
-	useEffect(() => {
-		if (shouldExit) {
-			exit();
-		}
-	}, [shouldExit]);
+	// useEffect(() => {
+	// 	if (shouldExit) {
+	// 		exit();
+	// 	}
+	// }, [shouldExit]);
 
-	useTimeout(() => setShouldExit(true), animationTime + 5000);
+	// this controls the time that the animations (dots/spinner) is active
+	// useTimeout(() => setShouldExit(true), animationTime + 5000);
 
 	const handleSelect = (item: {label: string; value: AvailableScripts}) => {
 		switch (item.value) {
 			case 'basic-html':
-				setMessage({
-					hasDots: [false, animationTime],
-					text: 'Creating a basic html,css,js template',
-				});
-
-				createBasicPlayGround();
+				setScript(() => 'basic-html');
 				break;
 
 			// TODO: Delete this since I don't really use sass anymore
 			case 'sass':
-				setMessage({
-					hasDots: [false, animationTime],
-					text: 'Creating a basic sass template',
-				});
-
+				setScript('sass');
 				break;
 
 			case 'change-dir':
-				setMessage({
-					hasDots: [false, animationTime],
-					text: 'Changing directory',
-				});
-
+				setScript('change-dir');
 				break;
 
 			case 'create-react-project':
-				setMessage({
-					hasDots: [false, animationTime],
-					text: 'Creating new react project',
-				});
-
-				createReactTemplate();
+				setScript('create-react-project');
 				break;
 
 			case 'create-react-component':
-				setMessage({
-					hasDots: [false, animationTime],
-					text: 'Creating new react component',
-				});
-
-				const hasError = createReactComponent();
-				if (hasError) {
-					process.stdout.write('WHDSAFAS');
-					write('hasError');
-				}
-
-				if (typeof hasError === 'string') {
-					setMessage({error: hasError, text: ''});
-				}
+				setScript('create-react-component');
 				break;
 
 			default:
-				break;
+				throw new Error('An unknown script has been selected');
 		}
 	};
 
-	return {handleSelect, message};
+	return {handleSelect, script};
 };

@@ -5,6 +5,11 @@ const {useTimeout} = pkg;
 
 import Title from './components/Title.js';
 import ScriptsList from './components/ScriptsList.js';
+import CreateBasicPlayGround from './scripts/CreateBasicPlayground.js';
+import ScriptAction from './components/ScriptAction.js';
+import {useHandleScripts} from './hooks/useHandleScripts.js';
+import {Text} from 'ink';
+import {useStdout} from 'ink';
 
 type AppProps = {
 	start: string | undefined;
@@ -16,13 +21,16 @@ type AppProps = {
  */
 export default function App({}: AppProps) {
 	// Have scripts be hidden until 3 seconds later so that it looks like its actually loading them
-	const [showScriptPrompt, setShowScriptPrompt] = useState(false);
-	useTimeout(() => setShowScriptPrompt(true), 3000);
+	const [showScriptPrompt, setShowScriptPrompt] = useState(true);
+	// useTimeout(() => setShowScriptPrompt(true), 3000);
+	const [script, setScript] = useState<string | undefined>();
+	const {write} = useStdout();
 
 	return (
 		<>
 			<Title />
-			{showScriptPrompt && <ScriptsList />}
+			<ScriptsList setScript={setScript} />
+			<Text>From app.tsx: {script}</Text>
 		</>
 	);
 }

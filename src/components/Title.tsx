@@ -14,8 +14,8 @@ export default function Title() {
 			<Gradient name="summer">
 				<BigText text={'ALL-IN-ONE-CLI-BUILDER'} font="chrome" align="center" />
 				<Text>
-					STARTING CLI BUILDER
-					<Dots time={2500} />
+					STARTING CLI BUILDER...
+					{/* <Dots time={2500} /> */}
 				</Text>
 			</Gradient>
 		</Box>
