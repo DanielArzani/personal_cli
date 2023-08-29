@@ -8,10 +8,14 @@ const {useTimeout} = pkg;
 import {AvailableScripts} from '../types/AvailableScriptsType.js';
 import createBasicPlayGround from '../scripts/createBasicPlayground.js';
 import createReactTemplate from '../scripts/createReactTemplate.js';
+import createReactComponent from '../scripts/createReactComponent.js';
+
+import {useStdout} from 'ink';
 
 type Message = {
-	hasDots: [boolean, number];
+	hasDots?: [boolean, number];
 	text: string;
+	error?: string;
 };
 
 /**
@@ -26,6 +30,7 @@ export const useHandleScripts = () => {
 	const [animationTime, setAnimationTime] = useState<number>(3000);
 	const [shouldExit, setShouldExit] = useState<boolean>(false);
 	const {exit} = useApp();
+	const {write} = useStdout();
 
 	// exit the application
 	useEffect(() => {
@@ -79,6 +84,15 @@ export const useHandleScripts = () => {
 					text: 'Creating new react component',
 				});
 
+				const hasError = createReactComponent();
+				if (hasError) {
+					process.stdout.write('WHDSAFAS');
+					write('hasError');
+				}
+
+				if (typeof hasError === 'string') {
+					setMessage({error: hasError, text: ''});
+				}
 				break;
 
 			default:

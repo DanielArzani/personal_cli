@@ -34,6 +34,8 @@ export default function ScriptsList({}: ScriptsListProps) {
 				<SelectInput items={scripts} onSelect={handleSelect} />
 			</Box>
 
+			{message?.error && <ScriptMessage text={message.error} />}
+
 			<ScriptMessage
 				text={message ? message.text : ''}
 				hasDots={message?.hasDots}
