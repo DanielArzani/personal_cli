@@ -18,7 +18,6 @@ export const useHandleScripts = () => {
 	const [animationTime, setAnimationTime] = useState<number>(3000);
 	const [shouldExit, setShouldExit] = useState<boolean>(false);
 	const {exit} = useApp();
-	const {write} = useStdout();
 
 	// exit the application
 	// useEffect(() => {

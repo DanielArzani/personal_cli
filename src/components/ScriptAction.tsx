@@ -1,11 +1,5 @@
 import React from 'react';
 
-import {createDirectory} from '../node_functions/createDir.js';
-import {createFile} from '../node_functions/createFile.js';
-import openFileWithApp from '../node_functions/openFileWithApp.js';
-import {generateRandomString} from '../utils/generateRandomString.js';
-import {basicHtmlTemplate} from '../templates/basic-html/basicHtml.js';
-
 import {Text} from 'ink';
 import CreateBasicPlayGround from '../scripts/CreateBasicPlayground.js';
 import {AvailableScripts} from '../types/AvailableScriptsType.js';
