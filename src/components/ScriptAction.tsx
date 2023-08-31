@@ -4,6 +4,7 @@ import {Text} from 'ink';
 import CreateBasicPlayGround from '../scripts/CreateBasicPlayground.js';
 import {AvailableScripts} from '../types/AvailableScriptsType.js';
 import CreateReactTemplate from '../scripts/CreateReactTemplate.js';
+import CreateReactComponent from '../scripts/CreateReactComponent.js';
 
 type ScriptActionProps = {
 	script: AvailableScripts;
@@ -41,7 +42,7 @@ export default function ScriptAction({script}: ScriptActionProps) {
 	} else if (script === 'create-react-component') {
 		return (
 			<>
-				<Text>COMING SOON...</Text>
+				<CreateReactComponent />
 			</>
 		);
 	} else {

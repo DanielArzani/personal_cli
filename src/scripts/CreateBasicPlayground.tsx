@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react';
-
 import {createDirectory} from '../node_functions/createDir.js';
 import {createFile} from '../node_functions/createFile.js';
 import openFileWithApp from '../node_functions/openFileWithApp.js';
@@ -8,10 +7,11 @@ import {basicHtmlTemplate} from '../templates/basic-html/basicHtml.js';
 import {Text} from 'ink';
 
 /**
- * Creates a folder with a html, css and js file located within it. Returns the error message if one occurs
+ * Creates a folder with a html, css and js file located within it
  */
 export default function CreateBasicPlayGround() {
 	const [error, setError] = useState<string | undefined>();
+	const [success, setSuccess] = useState<boolean>(false);
 
 	useEffect(() => {
 		try {
@@ -22,15 +22,13 @@ export default function CreateBasicPlayGround() {
 				`pad-${generateRandomString()}`,
 			);
 
-			const newHtmlFile = createFile(
-				newDirectory,
-				'index.html',
-				basicHtmlTemplate(),
-			);
-			const newCssFile = createFile(newDirectory, 'styles.css', '');
-			const newJsFile = createFile(newDirectory, 'app.js', '');
+			createFile(newDirectory, 'index.html', basicHtmlTemplate());
+			createFile(newDirectory, 'styles.css', '');
+			createFile(newDirectory, 'app.js', '');
 
 			openFileWithApp(newDirectory);
+
+			setSuccess(true);
 		} catch (error) {
 			if (error instanceof Error) {
 				setError(error.message);
@@ -38,5 +36,9 @@ export default function CreateBasicPlayGround() {
 		}
 	}, []);
 
-	return <>{error && <Text>{error}</Text>}</>;
+	if (success) {
+		return <Text>Successfully created new basic playground</Text>;
+	} else {
+		return <>{error && <Text>{error}</Text>}</>;
+	}
 }
