@@ -3,4 +3,5 @@ export type AvailableScripts =
 	| 'change-dir'
 	| 'create-react-project'
 	| 'create-react-component'
+	| 'create-new-context'
 	| 'close';

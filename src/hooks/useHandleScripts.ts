@@ -27,6 +27,10 @@ export const useHandleScripts = () => {
 				setScript('create-react-component');
 				break;
 
+			case 'create-new-context':
+				setScript('create-new-context');
+				break;
+
 			case 'close':
 				setScript('close');
 				break;

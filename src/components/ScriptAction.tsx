@@ -7,6 +7,7 @@ import CreateBasicPlayGround from '../scripts/CreateBasicPlayground.js';
 import CreateReactComponent from '../scripts/CreateReactComponent.js';
 import CreateReactTemplate from '../scripts/CreateReactTemplate.js';
 import ChangeDirectory from '../scripts/ChangeDirectory.js';
+import CreateContext from '../scripts/CreateContext.js';
 
 type ScriptActionProps = {
 	script: AvailableScripts;
@@ -39,6 +40,12 @@ export default function ScriptAction({script}: ScriptActionProps) {
 		return (
 			<>
 				<CreateReactComponent />
+			</>
+		);
+	} else if (script === 'create-new-context') {
+		return (
+			<>
+				<CreateContext />
 			</>
 		);
 	} else if (script === 'close') {

@@ -15,6 +15,7 @@ const scripts: {label: string; value: AvailableScripts}[] = [
 	{label: 'Change directory', value: 'change-dir'},
 	{label: 'Create a new react project', value: 'create-react-project'},
 	{label: 'Create a new react component', value: 'create-react-component'},
+	{label: 'Create new context file', value: 'create-new-context'},
 	{label: 'Close the application', value: 'close'},
 ];
 
