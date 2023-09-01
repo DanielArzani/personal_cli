@@ -1,6 +1,7 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 
 import {Box, Text} from 'ink';
+import {useApp} from 'ink';
 
 import {createDirectory} from '../node_functions/createDir.js';
 import {createFile} from '../node_functions/createFile.js';
@@ -20,6 +21,14 @@ export default function CreateReactComponent() {
 	const [error, setError] = useState<string | undefined>();
 	const [success, setSuccess] = useState<boolean>(false);
 	const [nameInput, setNameInput] = useState<string>('');
+	const {exit} = useApp();
+
+	// I can use this here to close the application because useEffect only runs after the component has been rendered
+	useEffect(() => {
+		if (success || error) {
+			exit();
+		}
+	}, [success, error]);
 
 	/**
 	 * Function to create the new React component.
