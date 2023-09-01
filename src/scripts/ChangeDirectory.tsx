@@ -29,6 +29,12 @@ const directories: AvailableDirectories = [
 		path: '/Users/danielarzanipour/Documents/Coding/Online Courses/udemy-courses/jonas-react',
 		appToOpenWith: 'open',
 	},
+
+	{
+		dirName: 'Shell Scripts (can only open from root directory)',
+		path: '.zshrc',
+		appToOpenWith: 'code',
+	},
 ];
 
 /**
