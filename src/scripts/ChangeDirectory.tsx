@@ -10,16 +10,24 @@ const directories: AvailableDirectories = [
 	{
 		dirName: 'FEM Projects',
 		path: '/Users/danielarzanipour/Documents/coding/Front-End-Mentor-Projects',
+		appToOpenWith: 'open',
 	},
 
 	{
 		dirName: 'WebDev Portfolio',
 		path: '/Users/danielarzanipour/Documents/Coding/portfolio/portfolios/web-dev',
+		appToOpenWith: 'open',
 	},
 
 	{
 		dirName: 'My Ink CLI',
 		path: '/Users/danielarzanipour/Documents/Coding/automation-scripts/react-ink-scripts/my-ink-cli',
+		appToOpenWith: 'code',
+	},
+	{
+		dirName: 'Jonas React',
+		path: '/Users/danielarzanipour/Documents/Coding/Online Courses/udemy-courses/jonas-react',
+		appToOpenWith: 'open',
 	},
 ];
 
@@ -35,7 +43,7 @@ export default function ChangeDirectory() {
 			const selectedDir = directories.find(d => d.dirName === item.value);
 			if (selectedDir) {
 				changeDirectory(selectedDir.path);
-				openFileWithApp(selectedDir.path, 'open');
+				openFileWithApp(selectedDir.path, selectedDir.appToOpenWith);
 				setSuccess(true);
 			}
 		} catch (err) {
