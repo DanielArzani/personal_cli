@@ -1,13 +1,6 @@
-import React, {useEffect, useState} from 'react';
-
-import {useApp} from 'ink';
-
-import pkg from 'usehooks-ts';
-const {useTimeout} = pkg;
+import React, {useState} from 'react';
 
 import {AvailableScripts} from '../types/AvailableScriptsType.js';
-
-import {useStdout} from 'ink';
 
 /**
  * When an option from the SelectInput is chosen, this component will return a string matching that value and that can be used to call the correct script from ScriptAction
@@ -15,19 +8,6 @@ import {useStdout} from 'ink';
  */
 export const useHandleScripts = () => {
 	const [script, setScript] = useState<AvailableScripts | undefined>();
-	const [animationTime, setAnimationTime] = useState<number>(3000);
-	const [shouldExit, setShouldExit] = useState<boolean>(false);
-	const {exit} = useApp();
-
-	// exit the application
-	// useEffect(() => {
-	// 	if (shouldExit) {
-	// 		exit();
-	// 	}
-	// }, [shouldExit]);
-
-	// this controls the time that the animations (dots/spinner) is active
-	// useTimeout(() => setShouldExit(true), animationTime + 5000);
 
 	const handleSelect = (item: {label: string; value: AvailableScripts}) => {
 		switch (item.value) {
@@ -38,6 +18,7 @@ export const useHandleScripts = () => {
 			// TODO: Delete this since I don't really use sass anymore
 			case 'sass':
 				setScript('sass');
+
 				break;
 
 			case 'change-dir':
@@ -50,6 +31,10 @@ export const useHandleScripts = () => {
 
 			case 'create-react-component':
 				setScript('create-react-component');
+				break;
+
+			case 'close':
+				setScript('close');
 				break;
 
 			default:

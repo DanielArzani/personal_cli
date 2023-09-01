@@ -4,18 +4,19 @@ import {Box, Text} from 'ink';
 import SelectInput from 'ink-select-input';
 
 import {AvailableScripts} from '../types/AvailableScriptsType.js';
-import {useHandleScripts} from '../hooks/useHandleScripts.js';
 import ScriptAction from './ScriptAction.js';
+import {useHandleScripts} from '../hooks/useHandleScripts.js';
 
 /**
  * These are essentially the options for the select element, it has to take a slightly different form for react-ink apps though
  */
 const scripts: {label: string; value: AvailableScripts}[] = [
-	{label: 'basic-html', value: 'basic-html'},
-	{label: 'sass', value: 'sass'},
-	{label: 'change-dir', value: 'change-dir'},
-	{label: 'create-react-project', value: 'create-react-project'},
-	{label: 'create-react-component', value: 'create-react-component'},
+	{label: 'Create a basic html playground', value: 'basic-html'},
+	{label: 'Create a sass template', value: 'sass'},
+	{label: 'Change directory', value: 'change-dir'},
+	{label: 'Create a new react project', value: 'create-react-project'},
+	{label: 'Create a new react component', value: 'create-react-component'},
+	{label: 'Close the application', value: 'close'},
 ];
 
 type ScriptsListProps = {};
@@ -33,7 +34,6 @@ export default function ScriptsList({}: ScriptsListProps) {
 			<Box marginY={1}>
 				<SelectInput items={scripts} onSelect={handleSelect} />
 			</Box>
-
 			{script && <ScriptAction script={script} />}
 		</>
 	);

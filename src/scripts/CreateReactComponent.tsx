@@ -1,13 +1,14 @@
 import React, {useState} from 'react';
-import {getWorkingDirectory} from '../node_functions/getWorkingDir.js';
-import {directoryExists} from '../node_functions/directoryExists.js';
-import {createDirectory} from '../node_functions/createDir.js';
-import {indexTemplate} from '../templates/react-new-component/indexTemplate.js';
-import {newComponentTemplate} from '../templates/react-new-component/newComponentTemplate.js';
-import {createFile} from '../node_functions/createFile.js';
+
 import {Box, Text} from 'ink';
-import TextInput from 'ink-text-input';
+
+import {createDirectory} from '../node_functions/createDir.js';
+import {createFile} from '../node_functions/createFile.js';
+import {directoryExists} from '../node_functions/directoryExists.js';
+import {getWorkingDirectory} from '../node_functions/getWorkingDir.js';
+import {indexTemplate} from '../templates/react-new-component/indexTemplate.js';
 import Input from '../components/Input.js';
+import {newComponentTemplate} from '../templates/react-new-component/newComponentTemplate.js';
 
 /**
  * Component to create a new React component in the src/components directory.

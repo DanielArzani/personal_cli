@@ -3,4 +3,5 @@ export type AvailableScripts =
 	| 'sass'
 	| 'change-dir'
 	| 'create-react-project'
-	| 'create-react-component';
+	| 'create-react-component'
+	| 'close';

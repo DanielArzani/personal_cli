@@ -1,7 +1,8 @@
-import {Text} from 'ink';
 import React, {useState} from 'react';
 
 import pkg from 'usehooks-ts';
+import {Text} from 'ink';
+
 const {useTimeout, useInterval} = pkg;
 
 type DotsProps = {

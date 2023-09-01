@@ -1,9 +1,11 @@
 import React, {useEffect, useState} from 'react';
+
+import {Text} from 'ink';
+
 import {copyAndMoveDirContents} from '../node_functions/copyAndMoveDirContents.js';
 import {getDirectoryContents} from '../node_functions/getDirContents.js';
 import {getWorkingDirectory} from '../node_functions/getWorkingDir.js';
 import openFileWithApp from '../node_functions/openFileWithApp.js';
-import {Text} from 'ink';
 
 /**
  * CREATES A COMPLETE PRODUCTION READY REACT TEMPLATE WITH TYPESCRIPT, TYPEDOCS, TAILWIND AND VITE

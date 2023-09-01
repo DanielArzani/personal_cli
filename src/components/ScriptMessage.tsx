@@ -1,9 +1,9 @@
 import React from 'react';
 
-import Dots from './Dots.js';
-
-import {Box, Text} from 'ink';
+import { Box, Text } from 'ink';
 import Spinner from 'ink-spinner';
+
+import Dots from './Dots.js';
 
 type ScriptMessageProps = {
 	text: string;
