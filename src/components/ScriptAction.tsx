@@ -1,13 +1,14 @@
-import React, { useEffect } from 'react';
+import React, {useEffect} from 'react';
 
 import pkg from 'usehooks-ts';
-import { Text } from 'ink';
-import { useApp } from 'ink';
+import {Text} from 'ink';
+import {useApp} from 'ink';
 
-import { AvailableScripts } from '../types/AvailableScriptsType.js';
+import {AvailableScripts} from '../types/AvailableScriptsType.js';
 import CreateBasicPlayGround from '../scripts/CreateBasicPlayground.js';
 import CreateReactComponent from '../scripts/CreateReactComponent.js';
 import CreateReactTemplate from '../scripts/CreateReactTemplate.js';
+import ChangeDirectory from '../scripts/ChangeDirectory.js';
 
 const {useTimeout} = pkg;
 
@@ -37,16 +38,10 @@ export default function ScriptAction({script}: ScriptActionProps) {
 				<CreateBasicPlayGround />
 			</>
 		);
-	} else if (script === 'sass') {
-		return (
-			<>
-				<Text>Sass will be removed, please choose another script...</Text>
-			</>
-		);
 	} else if (script === 'change-dir') {
 		return (
 			<>
-				<Text>COMING SOON...</Text>
+				<ChangeDirectory />
 			</>
 		);
 	} else if (script === 'create-react-project') {

@@ -15,12 +15,6 @@ export const useHandleScripts = () => {
 				setScript(() => 'basic-html');
 				break;
 
-			// TODO: Delete this since I don't really use sass anymore
-			case 'sass':
-				setScript('sass');
-
-				break;
-
 			case 'change-dir':
 				setScript('change-dir');
 				break;
