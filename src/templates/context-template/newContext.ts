@@ -21,6 +21,15 @@ type UserType = {
 	avatar?: string;
 };
 
+
+/**
+ * Utility type to enforce that a given object matches the 'State' type.
+ * This ensures that the object has all the properties of 'State' and no additional properties.
+ */
+export type EnforceState<T> = {
+  [K in keyof State]: T extends { [P in K]: State[K] } ? T[K] : never;
+};
+
 type State = {
 	isAuthenticated: boolean;
 	user: UserType | null;
