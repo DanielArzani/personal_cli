@@ -6,12 +6,23 @@ import {copyAndMoveDirContents} from '../node_functions/copyAndMoveDirContents.j
 import {getDirectoryContents} from '../node_functions/getDirContents.js';
 import {getWorkingDirectory} from '../node_functions/getWorkingDir.js';
 import openFileWithApp from '../node_functions/openFileWithApp.js';
-import exitApp from '../utils/exitApplication.js';
+import ExitApp from '../components/ExitApp.js';
+
+type Technologies = {
+	language: 'javascript' | 'typescript';
+	javascriptFramework: 'none' | 'react' | 'next';
+	buildTool: 'vite' | 'snowpack' | 'gulp';
+	cssFramework: 'none' | 'bootstrap' | 'tailwind' | 'styledComponents' | 'scss';
+	stateManagement: 'none' | 'redux';
+	testingFramework: 'none' | 'jest' | 'vitest';
+	routing: 'none' | 'react-router';
+	formHandling: 'none';
+	dataBase: 'none';
+};
 
 /**
- * CREATES A COMPLETE PRODUCTION READY REACT TEMPLATE WITH TYPESCRIPT, TYPEDOCS, TAILWIND AND VITE
+ * Scaffolds a production ready react project using the desired technologies
  */
-
 export default function CreateReactTemplate() {
 	const [error, setError] = useState<string | undefined>();
 	const [success, setSuccess] = useState<boolean>(false);
@@ -45,7 +56,12 @@ export default function CreateReactTemplate() {
 	}, []);
 
 	if (success) {
-		return <Text>Successfully created react template</Text>;
+		return (
+			<>
+				<Text>Successfully created react template</Text>;
+				<ExitApp />
+			</>
+		);
 	}
 
 	return <>{error && <Text>{error}</Text>}</>;

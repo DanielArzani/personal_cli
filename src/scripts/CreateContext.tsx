@@ -1,13 +1,13 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 
 import {Box, Text} from 'ink';
-import {useApp} from 'ink';
 
 import {createFile} from '../node_functions/createFile.js';
 import {directoryExists} from '../node_functions/directoryExists.js';
 import {getWorkingDirectory} from '../node_functions/getWorkingDir.js';
 import Input from '../components/Input.js';
 import newContextTemplate from '../templates/context-template/newContext.js';
+import ExitApp from '../components/ExitApp.js';
 
 /**
  * Creates a new context file with the boiler plate and a simple example that should be edited for the current context. Also sets up the useReducer hook.
@@ -16,13 +16,6 @@ export default function CreateContext() {
 	const [error, setError] = useState<string | undefined>();
 	const [success, setSuccess] = useState<boolean>(false);
 	const [nameInput, setNameInput] = useState<string>('');
-	const {exit} = useApp();
-
-	useEffect(() => {
-		if (success || error) {
-			exit();
-		}
-	}, [success, error]);
 
 	const createContextFile = () => {
 		try {
@@ -68,6 +61,8 @@ export default function CreateContext() {
 				{success && <Text>Successfully created new context file</Text>}
 				{error && <Text>{error}</Text>}
 			</Box>
+
+			<ExitApp />
 		</>
 	);
 }
