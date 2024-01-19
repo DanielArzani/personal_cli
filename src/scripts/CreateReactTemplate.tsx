@@ -36,11 +36,17 @@ export default function CreateReactTemplate() {
 			// Use path.join to construct the full path
 			const templateDir = path.join(getWorkingDirectory(), relativeTemplateDir);
 
+			console.log('templateDir', templateDir);
+
 			// get path to current directory
 			const currentDir = getWorkingDirectory();
 
+			console.log('currentDir', currentDir);
+
 			// copy all the contents of the react-template folder
 			const templateFiles = getDirectoryContents(templateDir);
+
+			console.log('templateFiles', templateFiles);
 
 			const newProjectDir = copyAndMoveDirContents(
 				templateFiles,
