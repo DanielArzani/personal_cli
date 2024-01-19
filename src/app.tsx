@@ -7,6 +7,7 @@ import Title from './components/Title.js';
 import ScriptsList from './components/ScriptsList.js';
 
 import {useStdout} from 'ink';
+import {TabList} from './components/Tabs.js';
 
 type AppProps = {
 	start: string | undefined;
@@ -21,10 +22,17 @@ export default function App({}: AppProps) {
 	// const [showScriptPrompt, setShowScriptPrompt] = useState(true);
 	// useTimeout(() => setShowScriptPrompt(true), 3000);
 
+	const [activeTab, setActiveTab] = useState<string>('general-use');
+
+	const handleTabChange = (tabName: string) => {
+		setActiveTab(tabName);
+	};
+
 	return (
 		<>
 			<Title />
-			<ScriptsList />
+			<TabList onTabChange={handleTabChange} />
+			<ScriptsList activeTab={activeTab} />
 		</>
 	);
 }
