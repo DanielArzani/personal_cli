@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 
-import pkg from 'usehooks-ts';
-const {useTimeout} = pkg;
+// import pkg from 'usehooks-ts';
+// const {useTimeout} = pkg;
 
 import Title from './components/Title.js';
 import ScriptsList from './components/ScriptsList.js';

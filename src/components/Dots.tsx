@@ -1,9 +1,8 @@
 import React, {useState} from 'react';
 
-import pkg from 'usehooks-ts';
+// import pkg from 'usehooks-ts';
+// const {useTimeout, useInterval} = pkg;
 import {Text} from 'ink';
-
-const {useTimeout, useInterval} = pkg;
 
 type DotsProps = {
 	time: number;
@@ -18,22 +17,23 @@ type DotsProps = {
  * STARTING CLI BUILDER...
  * STARTING CLI BUILDER.
  */
+// @ts-ignore
 export default function Dots({time}: DotsProps) {
 	const [dots, setDots] = useState<string>('.');
 	const [shouldStop, setShouldStop] = useState<boolean>(false);
 
-	useTimeout(() => setShouldStop(true), time);
+	// useTimeout(() => setShouldStop(true), time);
 
-	// add one dot each 500ms so that I get an effect that looks similar to a loading state
-	useInterval(() => {
-		if (shouldStop === true) return;
+	// // add one dot each 500ms so that I get an effect that looks similar to a loading state
+	// useInterval(() => {
+	// 	if (shouldStop === true) return;
 
-		if (dots.length < 3) {
-			setDots(dots + '.');
-		} else {
-			setDots('.');
-		}
-	}, 500);
+	// 	if (dots.length < 3) {
+	// 		setDots(dots + '.');
+	// 	} else {
+	// 		setDots('.');
+	// 	}
+	// }, 500);
 
 	return <Text>{dots}</Text>;
 }
