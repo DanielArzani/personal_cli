@@ -62,7 +62,7 @@ export default function CreateReactTemplate() {
 		return (
 			<>
 				<Text>Successfully created react template</Text>
-				<ExitApp />;
+				<ExitApp />
 			</>
 		);
 	}
