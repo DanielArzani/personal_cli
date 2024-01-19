@@ -8,6 +8,7 @@ import CreateReactComponent from '../scripts/CreateReactComponent.js';
 import CreateReactTemplate from '../scripts/CreateReactTemplate.js';
 import ChangeDirectory from '../scripts/ChangeDirectory.js';
 import CreateContext from '../scripts/CreateContext.js';
+import ExitApp from './ExitApp.js';
 
 type ScriptActionProps = {
 	script: AvailableScripts;
@@ -52,12 +53,14 @@ export default function ScriptAction({script}: ScriptActionProps) {
 		return (
 			<>
 				<Text>Closing Application...</Text>
+				<ExitApp />
 			</>
 		);
 	} else {
 		return (
 			<>
 				<Text>NOTHING CREATED</Text>;
+				<ExitApp />
 			</>
 		);
 	}
