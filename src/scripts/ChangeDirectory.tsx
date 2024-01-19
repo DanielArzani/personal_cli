@@ -5,6 +5,7 @@ import {Box, Text} from 'ink';
 import {changeDirectory} from '../node_functions/changeDir.js';
 import openFileWithApp from '../node_functions/openFileWithApp.js';
 import SelectInput from 'ink-select-input';
+import exitApp from '../utils/exitApplication.js';
 
 const directories: AvailableDirectories = [
 	{

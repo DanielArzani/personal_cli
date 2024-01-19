@@ -6,6 +6,7 @@ import {copyAndMoveDirContents} from '../node_functions/copyAndMoveDirContents.j
 import {getDirectoryContents} from '../node_functions/getDirContents.js';
 import {getWorkingDirectory} from '../node_functions/getWorkingDir.js';
 import openFileWithApp from '../node_functions/openFileWithApp.js';
+import exitApp from '../utils/exitApplication.js';
 
 /**
  * CREATES A COMPLETE PRODUCTION READY REACT TEMPLATE WITH TYPESCRIPT, TYPEDOCS, TAILWIND AND VITE

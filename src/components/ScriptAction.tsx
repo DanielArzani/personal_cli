@@ -1,6 +1,6 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 
-import {Text} from 'ink';
+import {Text, useApp} from 'ink';
 
 import {AvailableScripts} from '../types/AvailableScriptsType.js';
 import CreateBasicPlayGround from '../scripts/CreateBasicPlayground.js';
@@ -55,6 +55,10 @@ export default function ScriptAction({script}: ScriptActionProps) {
 			</>
 		);
 	} else {
-		return <Text>NOTHING CREATED</Text>;
+		return (
+			<>
+				<Text>NOTHING CREATED</Text>;
+			</>
+		);
 	}
 }
