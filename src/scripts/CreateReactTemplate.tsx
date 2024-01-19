@@ -3,10 +3,11 @@ import React, {useEffect, useState} from 'react';
 import {Text} from 'ink';
 
 import {copyAndMoveDirContents} from '../node_functions/copyAndMoveDirContents.js';
+import ExitApp from '../components/ExitApp.js';
 import {getDirectoryContents} from '../node_functions/getDirContents.js';
 import {getWorkingDirectory} from '../node_functions/getWorkingDir.js';
 import openFileWithApp from '../node_functions/openFileWithApp.js';
-import ExitApp from '../components/ExitApp.js';
+import path from 'path';
 
 type Technologies = {
 	language: 'javascript' | 'typescript';
@@ -29,9 +30,11 @@ export default function CreateReactTemplate() {
 
 	useEffect(() => {
 		try {
-			// get path to the template
-			const templateDir =
-				'/Users/danielarzanipour/Documents/Coding/automation-scripts/react-ink-scripts/my-ink-cli/src/templates/react-template';
+			// Define relative path from the project root
+			const relativeTemplateDir = 'src/templates/react-template';
+
+			// Use path.join to construct the full path
+			const templateDir = path.join(getWorkingDirectory(), relativeTemplateDir);
 
 			// get path to current directory
 			const currentDir = getWorkingDirectory();
