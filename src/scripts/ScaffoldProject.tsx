@@ -1,15 +1,14 @@
 import React, {useEffect, useState} from 'react';
-
 import {Text, useApp} from 'ink';
 import fsExtra from 'fs-extra';
-
+import {exec} from 'child_process';
+import fs from 'fs';
 import {copyAndMoveDirContents} from '../node_functions/copyAndMoveDirContents.js';
 import ExitApp from '../components/ExitApp.js';
 import {getDirectoryContents} from '../node_functions/getDirContents.js';
-import {getWorkingDirectory} from '../node_functions/getWorkingDir.js';
 import path from 'path';
-import {downloadAndExtractTemplates} from '../node_functions/downloadAndExtractTemplates.js';
 import SelectInput from 'ink-select-input';
+import {getWorkingDirectory} from '../node_functions/getWorkingDir.js';
 
 type Technologies = {
 	language: 'javascript' | 'typescript';
@@ -18,59 +17,74 @@ type Technologies = {
 	cssFramework: 'tailwind' | 'styledComponents';
 };
 
-/**
- * Scaffolds a production ready react project using the desired technologies
- */
 export default function ScaffoldProject() {
-	const [error, setError] = useState('');
-	const [isComplete, setIsComplete] = useState(false);
+	const [error, setError] = useState<string>('');
+	const [isComplete, setIsComplete] = useState<boolean>(false);
 	const {exit} = useApp();
 
-	// @ts-ignore
-	const handleSelect = async item => {
+	const handleSelect = async (item: {value: string}) => {
 		try {
 			const outputPath = './templates.zip';
-			const extractPath = getWorkingDirectory();
+			const extractPath = process.cwd();
 			const repoUrl =
 				'https://github.com/DanielArzani/personal_cli/archive/refs/heads/main.zip';
 
-			await downloadAndExtractTemplates(repoUrl, outputPath, extractPath);
+			// Download and extract the ZIP file
+			const downloadCommand = `curl -L ${repoUrl} -o ${outputPath}`;
+			const extractCommand = `unzip ${outputPath} -d ${extractPath}`;
 
-			const templateDir = path.join(extractPath, item.value);
+			exec(downloadCommand, async (downloadError: Error | null) => {
+				if (downloadError) {
+					throw downloadError;
+				}
 
-			if (!fsExtra.existsSync(templateDir)) {
-				throw new Error(`Template directory not found: ${templateDir}`);
-			}
+				exec(extractCommand, (extractError: Error | null) => {
+					if (extractError) {
+						throw extractError;
+					}
 
-			const templateFiles = getDirectoryContents(templateDir);
-			copyAndMoveDirContents(templateFiles, templateDir, getWorkingDirectory());
+					const templateDir = path.join(extractPath, item.value);
 
-			fsExtra.unlinkSync(outputPath);
-			fsExtra.removeSync(path.join(extractPath, 'personal_cli-main'));
+					if (!fs.existsSync(templateDir)) {
+						throw new Error(`Template directory not found: ${templateDir}`);
+					}
 
-			setIsComplete(true);
-		} catch (err) {
-			// @ts-ignore
+					const templateFiles = getDirectoryContents(templateDir);
+					copyAndMoveDirContents(
+						templateFiles,
+						templateDir,
+						getWorkingDirectory(),
+					);
+
+					fsExtra.removeSync(path.join(extractPath, 'personal_cli-main'));
+
+					setIsComplete(true);
+				});
+			});
+		} catch (err: any) {
 			setError(err.message);
 		}
 	};
-
 	const items = [
 		{
 			label: 'JavaScript React Vite Styled-Components',
-			value: 'javascript-templates/javascript-react-vite-styled-components',
+			value:
+				'personal_cli-main/src/templates/javascript-templates/javascript-react-vite-styled-components',
 		},
 		{
 			label: 'JavaScript React Vite Tailwind',
-			value: 'javascript-templates/javascript-react-vite-tailwind',
+			value:
+				'personal_cli-main/src/templates/javascript-templates/javascript-react-vite-tailwind',
 		},
 		{
 			label: 'TypeScript React Vite Styled-Components',
-			value: 'typescript-templates/typescript-react-vite-styled-components',
+			value:
+				'personal_cli-main/src/templates/typescript-templates/typescript-react-vite-styled-components',
 		},
 		{
 			label: 'TypeScript React Vite Tailwind',
-			value: 'typescript-templates/typescript-react-vite-tailwind',
+			value:
+				'personal_cli-main/src/templates/typescript-templates/typescript-react-vite-tailwind',
 		},
 	];
 

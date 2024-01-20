@@ -1,6 +1,9 @@
 import fetch from 'node-fetch';
 import fs from 'fs';
 import unzipper from 'unzipper';
+import sleep from '../utils/sleep.js';
+
+//! Not working, it successfully gets the zip file from a repo and moves it to the given destination and unzips it but there are files missing.
 
 /**
  * Asynchronously downloads a ZIP file from a given URL and extracts its contents to a specified directory.
@@ -26,31 +29,27 @@ export const downloadAndExtractTemplates = async (
 	repoUrl: string,
 	outputPath: string,
 	extractPath: string,
-): Promise<void> => {
+) => {
+	let _ = outputPath; // to avoid linter warning about output path not being used
 	try {
 		const response = await fetch(repoUrl);
-		const fileStream = fs.createWriteStream(outputPath);
 
-		// Wait for the ZIP file to be fully written to outputPath
-		await new Promise<void>((resolve, reject) => {
-			response.body?.pipe(fileStream);
-			response.body?.on('error', error => {
-				console.error('Error downloading the ZIP file:', error);
-				reject(error);
-			});
-			fileStream.on('finish', resolve);
-		});
+		if (!response.ok) {
+			throw new Error(`Unexpected response ${response.statusText}`);
+		}
 
-		// Wait for the ZIP file to be fully extracted
-		await new Promise<void>((resolve, reject) => {
-			fs.createReadStream(outputPath)
+		// Pipe the response stream directly to the unzipper
+		await new Promise((resolve, reject) => {
+			if (response.body === null) {
+				throw new Error('Response body is null');
+			}
+			response.body
 				.pipe(unzipper.Extract({path: extractPath}))
 				.on('close', resolve)
-				.on('error', error => {
-					console.error('Error extracting the ZIP file:', error);
-					reject(error);
-				});
+				.on('error', reject);
 		});
+
+		console.log('Templates extracted successfully.');
 	} catch (error) {
 		console.error('Error in downloadAndExtractTemplates:', error);
 		throw error; // Re-throw the error to handle it in the calling function
