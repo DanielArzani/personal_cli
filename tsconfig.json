@@ -9,6 +9,8 @@
 		"src"
 	],
 	"exclude": [
-		"src/templates/react-template/*"
+		"src/templates/react-template/*",
+		"src/templates/javascript-templates/*",
+		"src/templates/typescript-templates/*",
 	]
 }

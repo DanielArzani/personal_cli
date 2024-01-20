@@ -14,23 +14,14 @@ import {useHandleScripts} from '../hooks/useHandleScripts.js';
 /**
  * These are essentially the options for the select element, it has to take a slightly different form for react-ink apps though
  */
-const scripts: {label: string; value: AvailableScripts}[] = [
-	{label: 'Create a basic html playground', value: 'basic-html'},
-	{label: 'Change directory', value: 'change-dir'},
-	{label: 'Create a new react project', value: 'create-react-project'},
-	{label: 'Create a new react component', value: 'create-react-component'},
-	{label: 'Create new context file', value: 'create-new-context'},
-	{label: 'Close the application', value: 'close'},
-];
-
 const generalScripts: {label: string; value: GeneralScript}[] = [
 	{label: 'Create a basic html playground', value: 'basic-html'},
+	{label: 'Create a new project', value: 'scaffold-project'},
 	{label: 'Change directory', value: 'change-dir'},
 	{label: 'Close the application', value: 'close'},
 ];
 
 const reactScripts: {label: string; value: ReactScript}[] = [
-	{label: 'Create a new react project', value: 'create-react-project'},
 	{label: 'Create a new react component', value: 'create-react-component'},
 	{label: 'Create new context file', value: 'create-new-context'},
 ];

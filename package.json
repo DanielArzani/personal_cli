@@ -23,6 +23,7 @@
 		"ink": "^4.1.0",
 		"ink-big-text": "^2.0.0",
 		"ink-gradient": "^3.0.0",
+		"ink-multi-select": "^2.0.0",
 		"ink-select-input": "^5.0.0",
 		"ink-spinner": "^5.0.0",
 		"ink-tab": "^5.0.0",

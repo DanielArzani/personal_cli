@@ -5,10 +5,10 @@ import {Text, useApp} from 'ink';
 import {AvailableScripts} from '../types/AvailableScriptsType.js';
 import CreateBasicPlayGround from '../scripts/CreateBasicPlayground.js';
 import CreateReactComponent from '../scripts/CreateReactComponent.js';
-import CreateReactTemplate from '../scripts/CreateReactTemplate.js';
 import ChangeDirectory from '../scripts/ChangeDirectory.js';
 import CreateContext from '../scripts/CreateContext.js';
 import ExitApp from './ExitApp.js';
+import ScaffoldProject from '../scripts/ScaffoldProject.js';
 
 type ScriptActionProps = {
 	script: AvailableScripts;
@@ -31,10 +31,10 @@ export default function ScriptAction({script}: ScriptActionProps) {
 				<ChangeDirectory />
 			</>
 		);
-	} else if (script === 'create-react-project') {
+	} else if (script === 'scaffold-project') {
 		return (
 			<>
-				<CreateReactTemplate />
+				<ScaffoldProject />
 			</>
 		);
 	} else if (script === 'create-react-component') {

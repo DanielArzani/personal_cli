@@ -19,8 +19,8 @@ export const useHandleScripts = () => {
 				setScript('change-dir');
 				break;
 
-			case 'create-react-project':
-				setScript('create-react-project');
+			case 'scaffold-project':
+				setScript('scaffold-project');
 				break;
 
 			case 'create-react-component':
