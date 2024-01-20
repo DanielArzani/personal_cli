@@ -1,13 +1,15 @@
 import React, {useEffect, useState} from 'react';
 
 import {Text} from 'ink';
+import fs from 'fs';
+import {rimraf} from 'rimraf';
 
 import {copyAndMoveDirContents} from '../node_functions/copyAndMoveDirContents.js';
 import ExitApp from '../components/ExitApp.js';
 import {getDirectoryContents} from '../node_functions/getDirContents.js';
 import {getWorkingDirectory} from '../node_functions/getWorkingDir.js';
-import openFileWithApp from '../node_functions/openFileWithApp.js';
 import path from 'path';
+import {downloadAndExtractTemplates} from '../node_functions/downloadAndExtractTemplates.js';
 
 type Technologies = {
 	language: 'javascript' | 'typescript';
@@ -29,39 +31,42 @@ export default function CreateReactTemplate() {
 	const [success, setSuccess] = useState<boolean>(false);
 
 	useEffect(() => {
-		try {
-			// Define relative path from the project root
-			const relativeTemplateDir = 'src/templates/react-template';
+		const init = async () => {
+			try {
+				const repoUrl =
+					'https://github.com/DanielArzani/personal_cli/archive/refs/heads/main.zip';
+				const outputPath = './templates.zip';
+				const extractPath = getWorkingDirectory();
 
-			// Use path.join to construct the full path
-			const templateDir = path.join(getWorkingDirectory(), relativeTemplateDir);
+				await downloadAndExtractTemplates(repoUrl, outputPath, extractPath);
 
-			console.log('templateDir', templateDir);
+				const pathToTemplate = 'personal_cli-main/src/templates/react-template';
+				const templateDir = path.join(extractPath, pathToTemplate);
 
-			// get path to current directory
-			const currentDir = getWorkingDirectory();
+				if (!fs.existsSync(templateDir)) {
+					throw new Error(`Directory not found: ${templateDir}`);
+				}
 
-			console.log('currentDir', currentDir);
+				const templateFiles = getDirectoryContents(templateDir);
+				copyAndMoveDirContents(
+					templateFiles,
+					templateDir,
+					getWorkingDirectory(),
+				);
 
-			// copy all the contents of the react-template folder
-			const templateFiles = getDirectoryContents(templateDir);
+				// Cleanup: Delete the downloaded ZIP file and extracted directory
+				fs.unlinkSync(outputPath);
+				rimraf.sync(path.join(extractPath, 'personal_cli-main'));
 
-			console.log('templateFiles', templateFiles);
-
-			const newProjectDir = copyAndMoveDirContents(
-				templateFiles,
-				templateDir,
-				currentDir,
-			);
-
-			openFileWithApp(newProjectDir);
-
-			setSuccess(true);
-		} catch (error) {
-			if (error instanceof Error) {
-				setError(error.message);
+				setSuccess(true);
+			} catch (error) {
+				if (error instanceof Error) {
+					setError(error.message);
+				}
 			}
-		}
+		};
+
+		init();
 	}, []);
 
 	if (success) {

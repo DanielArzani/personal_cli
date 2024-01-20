@@ -6,5 +6,8 @@ import fs from 'fs-extra';
  * @returns An array of strings representing the contents of the directory.
  */
 export function getDirectoryContents(path: string): string[] {
+	if (!fs.existsSync(path)) {
+		throw new Error(`Directory not found: ${path}`);
+	}
 	return fs.readdirSync(path);
 }
