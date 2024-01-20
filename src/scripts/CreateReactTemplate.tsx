@@ -78,5 +78,14 @@ export default function CreateReactTemplate() {
 		);
 	}
 
-	return <>{error && <Text>{error}</Text>}</>;
+	return (
+		<>
+			{error && (
+				<>
+					<Text>{error}</Text>
+					<ExitApp />
+				</>
+			)}
+		</>
+	);
 }

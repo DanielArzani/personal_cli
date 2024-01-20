@@ -86,7 +86,12 @@ export default function ChangeDirectory() {
 	}
 
 	if (error) {
-		return <Text>{error}</Text>;
+		return (
+			<>
+				<Text>{error}</Text>;
+				<ExitApp />
+			</>
+		);
 	}
 
 	return (

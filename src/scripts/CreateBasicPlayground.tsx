@@ -53,6 +53,15 @@ export default function CreateBasicPlayGround({}) {
 			</>
 		);
 	} else {
-		return <>{error && <Text>{error}</Text>}</>;
+		return (
+			<>
+				{error && (
+					<>
+						<Text>{error}</Text>
+						<ExitApp />
+					</>
+				)}
+			</>
+		);
 	}
 }
