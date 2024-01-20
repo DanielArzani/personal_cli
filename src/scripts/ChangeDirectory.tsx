@@ -1,5 +1,7 @@
 import React, {useState} from 'react';
 
+import os from 'os';
+
 import {AvailableDirectories} from '../types/AvailableDirectories.js';
 import {Box, Text} from 'ink';
 import {changeDirectory} from '../node_functions/changeDir.js';
@@ -48,9 +50,23 @@ export default function ChangeDirectory() {
 	const handleSelect = (item: {label: string; value: string}) => {
 		try {
 			const selectedDir = directories.find(d => d.dirName === item.value);
+
+			// open in file system or vs code depending on the operating system and the above script
+			let appToOpenWith: string = '';
+			const isWindows = os.platform() === 'win32';
+			console.log('isWindows', isWindows);
+
+			if (selectedDir?.appToOpenWith === 'code') {
+				appToOpenWith = 'code';
+			} else if (isWindows) {
+				appToOpenWith = 'explorer';
+			} else {
+				appToOpenWith = 'open';
+			}
+
 			if (selectedDir) {
 				changeDirectory(selectedDir.path);
-				openFileWithApp(selectedDir.path, selectedDir.appToOpenWith);
+				openFileWithApp(selectedDir.path, appToOpenWith);
 				setSuccess(true);
 			}
 		} catch (err) {
