@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from 'react';
 
 import {Text} from 'ink';
+import os from 'os';
+import path from 'path';
 
 import {basicHtmlTemplate} from '../templates/basic-html/basicHtml.js';
 import {createDirectory} from '../node_functions/createDir.js';
@@ -18,7 +20,11 @@ export default function CreateBasicPlayGround({}) {
 
 	useEffect(() => {
 		try {
-			const pathToDesktop = '/Users/danielarzanipour/Desktop';
+			// Get the user's home directory
+			const homeDirectory = os.homedir();
+
+			// Construct the path to the desktop
+			const pathToDesktop = path.join(homeDirectory, 'Desktop');
 
 			const newDirectory = createDirectory(
 				pathToDesktop,
