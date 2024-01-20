@@ -15,11 +15,15 @@ type Technologies = {
 	language: 'javascript' | 'typescript';
 	javascriptFramework: 'none' | 'react' | 'next';
 	buildTool: 'vite' | 'snowpack' | 'gulp';
-	cssFramework: 'none' | 'bootstrap' | 'tailwind' | 'styledComponents' | 'scss';
+	cssFramework:
+		| 'vanillaCss'
+		| 'bootstrap'
+		| 'tailwind'
+		| 'styledComponents'
+		| 'scss';
 	stateManagement: 'none' | 'redux';
-	testingFramework: 'none' | 'jest' | 'vitest';
+	testingFramework: 'none' | 'jest' | 'vitest' | 'react-testing-library';
 	routing: 'none' | 'react-router';
-	formHandling: 'none';
 	dataBase: 'none';
 };
 
@@ -38,6 +42,8 @@ export default function CreateReactTemplate() {
 				const outputPath = './templates.zip';
 				const extractPath = getWorkingDirectory();
 
+				//! This is run twice because for the first run because for some reason isn't included vite.config.ts
+				await downloadAndExtractTemplates(repoUrl, outputPath, extractPath);
 				await downloadAndExtractTemplates(repoUrl, outputPath, extractPath);
 
 				const pathToTemplate = 'personal_cli-main/src/templates/react-template';
@@ -48,6 +54,9 @@ export default function CreateReactTemplate() {
 				}
 
 				const templateFiles = getDirectoryContents(templateDir);
+
+				console.log('templateFiles', templateFiles);
+
 				copyAndMoveDirContents(
 					templateFiles,
 					templateDir,
@@ -58,7 +67,7 @@ export default function CreateReactTemplate() {
 				fs.unlinkSync(outputPath);
 				rimraf.sync(path.join(extractPath, 'personal_cli-main'));
 
-				setSuccess(true);
+				// setSuccess(true);
 			} catch (error) {
 				if (error instanceof Error) {
 					setError(error.message);
