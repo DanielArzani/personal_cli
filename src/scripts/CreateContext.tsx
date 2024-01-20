@@ -10,7 +10,7 @@ import newContextTemplate from '../templates/context-template/newContext.js';
 import ExitApp from '../components/ExitApp.js';
 
 /**
- * Creates a new context file with the boiler plate and a simple example that should be edited for the current context. Also sets up the useReducer hook.
+ * Creates a new context file with the boiler plate and a simple example that should be edited for the current context. Also sets up the useReducer hook. The folder structure src/contexts must exist for this to work
  */
 export default function CreateContext() {
 	const [error, setError] = useState<string | undefined>();
@@ -58,11 +58,19 @@ export default function CreateContext() {
 			/>
 
 			<Box>
-				{success && <Text>Successfully created new context file</Text>}
-				{error && <Text>{error}</Text>}
+				{success && (
+					<>
+						<Text>Successfully created new context file</Text>
+						<ExitApp />
+					</>
+				)}
+				{error && (
+					<>
+						<Text>{error}</Text>
+						<ExitApp />
+					</>
+				)}
 			</Box>
-
-			<ExitApp />
 		</>
 	);
 }

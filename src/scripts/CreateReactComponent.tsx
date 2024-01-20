@@ -72,9 +72,18 @@ export default function CreateReactComponent() {
 			/>
 
 			<Box>
-				{success && <Text>Successfully created react template</Text>}
-				{error && <Text>{error}</Text>}
-				<ExitApp />
+				{success && (
+					<>
+						<Text>Successfully created react template</Text>
+						<ExitApp />
+					</>
+				)}
+				{error && (
+					<>
+						<Text>{error}</Text>
+						<ExitApp />
+					</>
+				)}
 			</Box>
 		</>
 	);
