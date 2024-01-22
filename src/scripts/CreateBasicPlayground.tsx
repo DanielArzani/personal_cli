@@ -22,9 +22,16 @@ export default function CreateBasicPlayGround({}) {
 		try {
 			// Get the user's home directory
 			const homeDirectory = os.homedir();
+			const isWindows = os.platform() === 'win32';
 
 			// Construct the path to the desktop
-			const pathToDesktop = path.join(homeDirectory, 'Desktop');
+			let pathToDesktop;
+
+			if (isWindows) {
+				pathToDesktop = path.join(homeDirectory, 'OneDrive\\Desktop');
+			} else {
+				pathToDesktop = path.join(homeDirectory, 'Desktop');
+			}
 
 			const newDirectory = createDirectory(
 				pathToDesktop,

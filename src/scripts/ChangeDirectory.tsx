@@ -49,7 +49,6 @@ export default function ChangeDirectory() {
 
 	// Get the user's home directory
 	const homeDirectory = os.homedir();
-	console.log('homeDirectory', homeDirectory);
 
 	const handleSelect = (item: {label: string; value: string}) => {
 		try {
@@ -58,7 +57,6 @@ export default function ChangeDirectory() {
 			// open in file system or vs code depending on the operating system and the above script
 			let appToOpenWith: string = '';
 			const isWindows = os.platform() === 'win32';
-			console.log('isWindows', isWindows);
 
 			if (selectedDir?.appToOpenWith === 'code') {
 				appToOpenWith = 'code';
