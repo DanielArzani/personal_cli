@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {Text, useApp} from 'ink';
 import fsExtra from 'fs-extra';
 import {exec} from 'child_process';
@@ -9,6 +9,7 @@ import {getDirectoryContents} from '../node_functions/getDirContents.js';
 import path from 'path';
 import SelectInput from 'ink-select-input';
 import {getWorkingDirectory} from '../node_functions/getWorkingDir.js';
+import AdmZip from 'adm-zip';
 
 type Technologies = {
 	language: 'javascript' | 'typescript';
@@ -17,6 +18,9 @@ type Technologies = {
 	cssFramework: 'tailwind' | 'styledComponents';
 };
 
+/**
+ * Component for scaffolding projects, it will extract a zip file from my templates in my repo and download and unzip the chosen one
+ */
 export default function ScaffoldProject() {
 	const [error, setError] = useState<string>('');
 	const [isComplete, setIsComplete] = useState<boolean>(false);
@@ -29,19 +33,18 @@ export default function ScaffoldProject() {
 			const repoUrl =
 				'https://github.com/DanielArzani/personal_cli/archive/refs/heads/main.zip';
 
-			// Download and extract the ZIP file
+			// Download the ZIP file
 			const downloadCommand = `curl -L ${repoUrl} -o ${outputPath}`;
-			const extractCommand = `unzip ${outputPath} -d ${extractPath}`;
 
 			exec(downloadCommand, async (downloadError: Error | null) => {
 				if (downloadError) {
 					throw downloadError;
 				}
 
-				exec(extractCommand, (extractError: Error | null) => {
-					if (extractError) {
-						throw extractError;
-					}
+				// Extract the ZIP file using adm-zip
+				try {
+					const zip = new AdmZip(outputPath);
+					zip.extractAllTo(extractPath, true);
 
 					const templateDir = path.join(extractPath, item.value);
 
@@ -59,12 +62,15 @@ export default function ScaffoldProject() {
 					fsExtra.removeSync(path.join(extractPath, 'personal_cli-main'));
 
 					setIsComplete(true);
-				});
+				} catch (extractError) {
+					throw extractError;
+				}
 			});
 		} catch (err: any) {
 			setError(err.message);
 		}
 	};
+
 	const items = [
 		{
 			label: 'JavaScript React Vite Styled-Components',

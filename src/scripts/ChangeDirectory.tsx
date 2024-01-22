@@ -47,6 +47,10 @@ export default function ChangeDirectory() {
 	const [error, setError] = useState<string | undefined>();
 	const [success, setSuccess] = useState<boolean>(false);
 
+	// Get the user's home directory
+	const homeDirectory = os.homedir();
+	console.log('homeDirectory', homeDirectory);
+
 	const handleSelect = (item: {label: string; value: string}) => {
 		try {
 			const selectedDir = directories.find(d => d.dirName === item.value);
