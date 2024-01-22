@@ -59,7 +59,9 @@ export default function ScaffoldProject() {
 						getWorkingDirectory(),
 					);
 
+					// Remove the extracted template directory and the ZIP file
 					fsExtra.removeSync(path.join(extractPath, 'personal_cli-main'));
+					fs.unlinkSync(outputPath);
 
 					setIsComplete(true);
 				} catch (extractError) {
